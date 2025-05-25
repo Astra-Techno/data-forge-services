@@ -10,6 +10,7 @@
         "astra-techno/data-forge": "^1.5",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.1",
+        "laravel/telescope": "^5.7",
         "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
