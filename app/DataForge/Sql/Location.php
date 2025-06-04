@@ -46,7 +46,8 @@ class Location extends Sql
     public function countries(&$data)
     {
         $query = Query('Countries');
-        $query->select('list', 'c.name AS id, c.name');
+        $query->select('list', 'c.name AS id, c.name, c.iso2 AS code');
+		$query->select('currency', 'c.currency AS id, c.currency AS name, c.iso2 AS country_code, c.currency_symbol');
         $query->select('total', 'COUNT(c.id) AS total');
 
         $query->from('countries AS c');
@@ -114,17 +115,21 @@ class Location extends Sql
         return $query;
     }
 
-
-
-    public function create(&$data)
+	public function languages(&$data)
     {
-        $query = Query('PaymentCreate');
-        $query->insert('payments', [
-            'subscription_id' => '{request.subscription_id}',
-            'amount' => '{request.amount}',
-            'status' => '{request.status}',
-            'payment_date' => now(),
-        ]);
+        $query = Query('Languages');
+        $query->select('list', 'l.two_letter AS id, l.language AS name, l.country');
+        $query->select('total', 'COUNT(l.id) AS total');
+
+        $query->from('languages AS l');
+		
+		$query->filterOptional('l.country={request.country}');
+
+        $query->order('l.language', 'ASC');
+		
+		$query->group('name');
+
         return $query;
     }
+	
 }

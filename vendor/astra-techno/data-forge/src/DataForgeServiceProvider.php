@@ -39,7 +39,7 @@ class DataForgeServiceProvider extends ServiceProvider
 
         // Alias the Sql class
         if (!class_exists('DataForge\Sql'))
-        class_alias(Sql::class, 'DataForge\Sql');
+			class_alias(Sql::class, 'DataForge\Sql');
 
         // Alias the Sql class
         if (!class_exists('DataForge\Entity'))
